@@ -32,3 +32,5 @@ Made the choice to return to Javascript. There are many things I don't like abou
 * ROT.js provides all the annoying things I don't necessarily want to code so that I can focus on game content.
 
 Though I have fallen a week behind by this decision, I will be happier in the long run by doing it now rather than later. I've written prototypes in raw Javascript and Typescript before; the main thing I will be learning from this exercise is Electron.
+
+I've run into an interesting dilemma so far where the canvas that I intend on attaching my game map to seems to be offset. I cannot determine if this is an error of design or a lack of knowledge of Electron's APIs.
