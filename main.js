@@ -3,10 +3,19 @@ const {app, BrowserWindow} = require('electron')
 let win
 
 function createWindow() {
-  win = new BrowserWindow({width: 800, height: 600})
+  win = new BrowserWindow({
+    title: 'Roguelike Tutorial 2018',
+    show: false,
+    useContentSize: true,
+    frame: false
+  })
   win.loadFile('index.html')
   win.on('closed', () => {
     win = null
+  })
+  win.on('ready-to-show', () => {
+    win.show()
+    win.focus()
   })
 }
 

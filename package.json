@@ -4,12 +4,17 @@
   "description": "A roguelike written in Jasvascript using the Electron library.",
   "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "package": "npm-run-all package:*",
+    "package:win": "electron-packager . --overwrite --platform=win32 --arch=x64 --out=out"
   },
   "author": "Rakaneth",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^2.0.2"
+    "@types/rot-js": "^0.6.3",
+    "electron": "^2.0.2",
+    "electron-packager": "^12.1.0",
+    "electron-winstaller": "^2.6.4",
+    "npm-run-all": "^4.1.3"
   },
   "dependencies": {
     "rot-js": "^0.6.5"
