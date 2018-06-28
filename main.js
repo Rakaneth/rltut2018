@@ -6,10 +6,10 @@ function createWindow() {
   win = new BrowserWindow({
     title: 'Roguelike Tutorial 2018',
     show: false,
-    useContentSize: true,
-    frame: false
+    useContentSize: true
   })
-  win.loadFile('index.html')
+  win.setContentSize(800, 600)
+  win.loadURL("file://" + __dirname + "/index.html")
   win.on('closed', () => {
     win = null
   })
