@@ -4,6 +4,8 @@ I figured out what my issue was - `ROT.Display.draw()` is meant to draw a single
 
 I have introduced the beginnings of the screen mechanism I try to use in all my roguelikes. Also, Electron's `require` system is slightly finicky - you have to `require` the script attached to the main page before further `require`s will work normally (see `index.html`)
 
+After a lot of finagling, I'm back to week one - a moving @ on a blank canvas, but using the entity implementation above. I think the hardest part of capturing input and producing output is over, though; I can build on the models I have created, adjusting as needed.
+
 ### The entity system
 
 I'll be making use of the technique described [here](http://www.codingcookies.com/2013/04/20/building-a-roguelike-in-javascript-part-4/) to set up my entities. It is well-suited to Javascript's prototypal inheritance scheme.
@@ -11,6 +13,10 @@ I'll be making use of the technique described [here](http://www.codingcookies.co
 ### The map
 
 I will only have one large map, likely based on simplex noise. There will be very few hard walls since the game will be set in a massive forest, but I plan to adjust FOV/rendering so that creatures in patches of woods can see each other, but not things outside, nor can creatures outside look in. 
+
+### Game state
+
+I like to hold the game state in one large object; it is a lot easier to serialize and reason about if it is all in one place. 
 
 ## 6/27/18
 
