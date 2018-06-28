@@ -22,6 +22,10 @@ I am following along with the roguelike tutorial given [here](https://www.reddit
 
 # Devlog
 
+## 6/28/18
+
+I figured out what my issue was - `ROT.Display.draw()` is meant to draw a single character and does strange things when fed a full string. I should have known that. Silly me. Onwards with catching up!
+
 ## 6/27/18
 
 Made the choice to return to Javascript. There are many things I don't like about writing in Python, despite the neat syntax for many things. 

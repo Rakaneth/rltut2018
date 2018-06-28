@@ -1,9 +1,13 @@
 const ROT = require('rot-js')
+const GAME = require('./game')
+const TITLE = require('./screens/title')
 
 window.onload = () => {
   let screen = document.getElementById("screen")
   let display = new ROT.Display({width: 80, height: 40, fontSize: 16})
   screen.appendChild(display.getContainer())
-  display.drawText(0, 0, "Hello Electron and ROT.js!")
+  GAME.register(TITLE)
+  GAME.init()
+  GAME.update()
 }
 
