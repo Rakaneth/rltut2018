@@ -1,16 +1,20 @@
 //Game state
-
-const Title = require('./screens/title')
+;
+const {Display} = require('rot-js')
 
 let GAME = {
   _curScreen: null,
   _screens: {},
   _player: {},
+  _display: new Display({width: 50, height: 50, fontSize: 16}),
   update: function()  {
-    this._curScreen.render()
+    this._display.clear()
+    this._curScreen.render(this._display)
   },
   init: function(){
     g = this
+    let screen = document.getElementById("screen")
+    screen.appendChild(this._display.getContainer())
     window.addEventListener("keydown", (e) => {
       g._curScreen.handleInput(e.keyCode, e.shiftKey)
     })
