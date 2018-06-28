@@ -1,4 +1,4 @@
-let Screen = (name) => {
+function Screen(name) {
   this.name = name
 }
 
