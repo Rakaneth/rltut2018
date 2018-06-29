@@ -1,3 +1,7 @@
+## 6/29/18
+
+Finished up Weeks 1 and 2, getting a rendered map under a moving @. Going with Simplex noise for now. `Array.fill` is *the worst* for filling a 2D array; all the arrays were *the same object,* causing my maps to look weird (and causing me to initially thing that I had somehow used `ROT.Noise.Simplex` incorrectly).
+
 ## 6/28/18
 
 I figured out what my issue was - `ROT.Display.draw()` is meant to draw a single character and does strange things when fed a full string. I should have known that. Silly me. Onwards with catching up!

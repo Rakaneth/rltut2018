@@ -12,7 +12,7 @@ I am following along with the roguelike tutorial given [here](https://www.reddit
 # Progress
 
 - [x] Week 1
-- [ ] Week 2
+- [x] Week 2
 - [ ] Week 3
 - [ ] Week 4
 - [ ] Week 5

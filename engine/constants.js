@@ -12,4 +12,35 @@ Constants.DIRS = {
   NONE: [0, 0]
 }
 
+Constants.TERRAIN = {
+  PATH: 1,
+  TREE: 2,
+  LAKE: 3
+}
+
+Constants.TILES = [
+  {
+    walk: false,
+    region: false,
+  },
+  {
+    walk: true,
+    region: true,
+    glyph: '.',
+    color: 'goldenrod'
+  },
+  {
+    walk: true,
+    region: true,
+    glyph: '\u2663',
+    color: 'darkgreen'
+  },
+  {
+    walk: false,
+    region: false,
+    glyph: '~',
+    color: 'darkblue'
+  }
+]
+
 module.exports = Constants

@@ -1,16 +1,21 @@
 //Game state
-;
+
 const {Display} = require('rot-js')
 const {baseMove} = require('./entity/mixins')
 const Entity = require ('./entity/entity')
 const UI = require('./ui')
+const Map = require('./map')
 
 let GAME = {
   _curScreen: null,
   _screens: {},
-  _player: {},
-  _display: new Display({width: 50, height: 50, fontSize: 16}),
+  _player: null,
+  MAPW: 50,
+  MAPH: 50,
+  _display: null,
   _things: {},
+  _map: {},
+  setUp: false,
   update: function()  {
     this._display.clear()
     this._curScreen.render(this._display)
@@ -26,6 +31,7 @@ let GAME = {
   },
   init: function(){
     g = this
+    this._display = new Display({width: this.MAPW, height: this.MAPH, fontSize: 16})
     let screen = document.getElementById("screen")
     screen.appendChild(this._display.getContainer())
     window.addEventListener("keydown", (e) => {
@@ -36,8 +42,12 @@ let GAME = {
       name: 'player',
       desc: 'The player.',
       mixins: [baseMove]
-    })
+    }),
+    this._map = new Map()
     this.addEntity(this._player)
+    let start = this._map.randomFloor()
+    this._player.move(start.x, start.y)
+    this.setUp = true
   },
   register: function(...screens) {
     for (let screen of screens) {
@@ -50,13 +60,22 @@ let GAME = {
     }
     this._curScreen = this._screens[screenName]
     this._curScreen.enter()
-    this.update()
+    if (this.setUp) { 
+      this.update()
+    }
   },
-  processAction(action, entity) {
+  processAction: function(action, entity) {
     if (action.move) {
       entity.moveTo(action.move)
+    } else if (action.screen) {
+      this.setScreen(action.screen)
     }
     this.update()
+  },
+  forEachThing: function(calbak) {
+    for (let thing of Object.values(this._things)) {
+      calbak(thing)
+    }
   }
 }
 
