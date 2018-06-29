@@ -13,6 +13,9 @@ let GAME = {
   update: function()  {
     this._display.clear()
     this._curScreen.render(this._display)
+    document.getElementById('char-name').innerText = this._player.name
+    document.getElementById('char-desc').innerText = this._player.desc
+    document.getElementById('char-loc').innerText = `(${this._player.x},${this._player.y})`
   },
   addEntity: function(entity) {
     this._things[entity.id] = entity

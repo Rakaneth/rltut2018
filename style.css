@@ -1,4 +1,18 @@
 body {
   margin: 0px;
   overflow: hidden;
+  background: grey;
+}
+
+#screen {
+  float: left;
+}
+
+#stats {
+  background-color: black;
+  color: white;
+  float: left;
+  border: 2px solid red;
+  max-width: 25%;
+  margin: 0px 5px;
 }
