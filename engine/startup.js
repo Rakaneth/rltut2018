@@ -4,8 +4,7 @@ const TITLE = require('./screens/title')
 
 window.onload = () => {
   GAME.register(TITLE)
-  GAME.setScreen('title')
   GAME.init()
-  GAME.update()
+  GAME.setScreen('title')
 }
 

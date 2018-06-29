@@ -34,4 +34,12 @@ Entity.prototype.hasMixin = function(mixin) {
   }
 }
 
+Entity.prototype.locString = function() {
+  return `(${this.x},${this.y})`
+}
+
+Entity.prototype.loc = function() {
+  return {x: this.x, y: this.y}
+}
+
 module.exports = Entity
