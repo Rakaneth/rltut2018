@@ -1,4 +1,4 @@
-const {Noise, RNG} = require('rot-js')
+const {Noise, RNG, FOV} = require('rot-js')
 const {TERRAIN, TILES} = require('./constants')
 const UTILS = require ('./utils')
 function Map(opts) {
@@ -9,6 +9,7 @@ function Map(opts) {
   this.regions = {}
   this.curRegion = 1
   let noise = new Noise.Simplex()
+  this.fov = new FOV.RecursiveShadowcasting((x, y) => !this.isRegionBorder(x, y))
 
   for (let y=0; y<this.height; y++) {
     this.tiles.push([])
@@ -116,7 +117,11 @@ Map.prototype._floodFill = function(x, y, region) {
 }
 
 Map.prototype.isRegionBorder = function(x, y) {
-  return this.neighbors(x, y).some(p => this.getRegion(p.x, p.y) !== this.getRegion(x, y))
+  return this.neighbors(x, y).some(p => {
+    return this.getRegion(p.x, p.y) !== this.getRegion(x, y) && 
+    this.getRegion(x, y) > 0 &&
+    this.getRegion(p.x, p.y) > 0
+  })
 }
 
 

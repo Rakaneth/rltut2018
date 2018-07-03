@@ -31,7 +31,15 @@ function inView(screenX, screenY) {
 
 Main.render = function(display) {
   let m = GAME._map
-  let tile, w
+  let tile, s
+  m.fov.compute(GAME._player.x, GAME._player.y, 10, function(x, y, r, v) {
+    tile = m.getTile(x, y)
+    s = toScreen(m, x, y)
+    if (tile.glyph && inView(s.x, s.y)) {
+      display.draw(s.x, s.y, tile.glyph, tile.color)
+    }
+  })
+  /*
   for (x=0; x<GAME.MAPW; x++) {
     for (y=0; y<GAME.MAPH; y++) {
       w = toMap(m, x, y)
@@ -41,6 +49,7 @@ Main.render = function(display) {
       }
     }
   }
+  */
   let things = Object.values(GAME._things)
   things.sort((fst, snd) => fst.layer - snd.layer)
   things.forEach((thing) => {
