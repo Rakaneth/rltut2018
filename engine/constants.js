@@ -39,7 +39,7 @@ Constants.TILES = [
     walk: false,
     region: "water",
     glyph: '~',
-    color: 'darkblue'
+    color: 'blue'
   }
 ]
 

@@ -14,11 +14,11 @@ function Map(opts) {
   for (let y=0; y<this.height; y++) {
     this.tiles.push([])
     for (let x=0; x<this.width; x++) {
-      let n = noise.get(x/100, y/100) * 100
+      let n = noise.get(x/this.width, y/this.height) * 100
       let choice
-      if (UTILS.between(n, -20, 20)) {
+      if (UTILS.between(n, -80, -60)) {
         choice = TERRAIN.PATH
-      } else if (n < -20) {
+      } else if (n < -80) {
         choice = TERRAIN.LAKE
       } else {
         choice = TERRAIN.TREE
@@ -30,8 +30,7 @@ function Map(opts) {
   for (let ry=0; ry<this.height; ry++) {
     for (let rx=0; rx<this.width; rx++) {
       if (this.getRegion(rx, ry) === 0 && this.getTile(rx, ry).walk) {
-        this._floodFill(rx, ry, this.curRegion)
-        this.curRegion++
+        this._floodFill(rx, ry, this.curRegion++)
       }
     }
   }
