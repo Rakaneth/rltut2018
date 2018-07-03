@@ -6,15 +6,12 @@ function Map(opts) {
   this.width = opts.width || 100
   this.height = opts.height || 100
   this.tiles = []
-  for (let fy=0; fy < this.height; fy++) {
-    this.tiles.push([])
-    for (let fx=0; fx < this.width; fx++) {
-      this.tiles[fy].push(0)
-    }
-  }
+  this.regions = {}
+  this.curRegion = 1
   let noise = new Noise.Simplex()
 
   for (let y=0; y<this.height; y++) {
+    this.tiles.push([])
     for (let x=0; x<this.width; x++) {
       let n = noise.get(x/100, y/100) * 100
       let choice
@@ -25,9 +22,19 @@ function Map(opts) {
       } else {
         choice = TERRAIN.TREE
       }
-      this.tiles[y][x] = choice
+      this.tiles[y].push(choice)
     }
   }
+
+  for (let ry=0; ry<this.height; ry++) {
+    for (let rx=0; rx<this.width; rx++) {
+      if (this.getRegion(rx, ry) === 0 && this.getTile(rx, ry).walk) {
+        this._floodFill(rx, ry, this.curRegion)
+        this.curRegion++
+      }
+    }
+  }
+  
 }
 
 Map.prototype.getTile = function(x, y) {
@@ -56,5 +63,61 @@ Map.prototype.randomFloor = function() {
 Map.prototype.isOOB = function(x, y) {
   return !(UTILS.between(x, 0, this.width-1) && UTILS.between(y, 0, this.height-1))
 }
+
+Map.prototype.neighbors = function(x, y) {
+  let minX = Math.max(0, x-1)
+  let maxX = Math.min(this.width-1, x+1)
+  let minY = Math.max(0, y-1)
+  let maxY = Math.min(this.height-1, y+1)
+  let results = []
+  for (let xs=minX; xs<= maxX; xs++) {
+    for (let ys=minY; ys<=maxY; ys++) {
+      let notSelf = (xs != x || ys != y)
+      let canWalk = this.getTile(xs, ys).walk
+      if (notSelf && canWalk) {
+        results.push({x: xs, y: ys})
+      }
+    }
+  }
+  return results
+}
+
+Map.prototype.getRegion = function(x, y) {
+  let key = `${x},${y}`
+  if (this.regions[key]) {
+    return this.regions[key]
+  } else {
+    return 0
+  }
+}
+
+Map.prototype.setRegion = function(x, y, region) {
+  let key = `${x},${y}`
+  this.regions[key] = region
+}
+
+Map.prototype._floodFill = function(x, y, region) {
+  let open = [{x, y}]
+  this.setRegion(x, y, region)
+  while (open.length > 0) {
+    let nxt = open.pop()
+    for (let nei of this.neighbors(nxt.x, nxt.y)) {
+      let nxtTile = this.getTile(nxt.x, nxt.y).region
+      let curTile = this.getTile(nei.x, nei.y).region
+      if (nxtTile !== curTile) {
+        continue
+      }
+      if (this.getRegion(nei.x, nei.y) === 0) {
+        this.setRegion(nei.x, nei.y, region)
+        open.push({x: nei.x, y: nei.y})
+      }
+    }
+  }
+}
+
+Map.prototype.isRegionBorder = function(x, y) {
+  return this.neighbors(x, y).some(p => this.getRegion(p.x, p.y) !== this.getRegion(x, y))
+}
+
 
 module.exports = Map

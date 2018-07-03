@@ -21,23 +21,23 @@ Constants.TERRAIN = {
 Constants.TILES = [
   {
     walk: false,
-    region: false,
+    region: "none",
   },
   {
     walk: true,
-    region: true,
+    region: "path",
     glyph: '.',
     color: 'goldenrod'
   },
   {
     walk: true,
-    region: true,
+    region: "forest",
     glyph: '\u2663',
     color: 'darkgreen'
   },
   {
     walk: false,
-    region: false,
+    region: "water",
     glyph: '~',
     color: 'darkblue'
   }
