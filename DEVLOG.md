@@ -1,3 +1,7 @@
+## 7/3/18
+
+With flood-filling, I've managed to implement regions for my FOV; the player can only see map tiles in his region, but may be able to detect objects outside of it if they have a smell (since the protagonist is a werewolf with heightened senses). The first part is implemented; the second part is not, since the player is still the only object known to the game.
+
 ## 6/29/18
 
 Finished up Weeks 1 and 2, getting a rendered map under a moving @. Going with Simplex noise for now. `Array.fill` is *the worst* for filling a 2D array; all the arrays were *the same object,* causing my maps to look weird (and causing me to initially thing that I had somehow used `ROT.Noise.Simplex` incorrectly).
