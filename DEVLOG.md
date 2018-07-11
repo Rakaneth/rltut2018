@@ -1,3 +1,7 @@
+## 7/11/18
+
+Drama and work have taken over my life for the time being, so progress may be slow. I've added some more mixins for my entities to use, but I don't have the energy to wire them up to test.
+
 ## 7/3/18
 
 With flood-filling, I've managed to implement regions for my FOV; the player can only see map tiles in his region, but may be able to detect objects outside of it if they have a smell (since the protagonist is a werewolf with heightened senses). The first part is implemented; the second part is not, since the player is still the only object known to the game.

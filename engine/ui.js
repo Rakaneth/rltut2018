@@ -1,4 +1,6 @@
-let UI = {}
+let UI = {
+  messages = []
+}
 
 UI.update = function(tag, val) {
   document.getElementById(tag).innerText = val
@@ -13,6 +15,10 @@ UI.updateSeen = function(objs) {
     line.innerText = `${obj.name} (${obj.glyph})`
     list.appendChild(line)
   }
+}
+
+UI.addMessage = function(msg) {
+  this.messages.push(msg)
 }
 
 module.exports = UI
