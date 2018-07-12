@@ -59,7 +59,22 @@ Mixins.stdDeath = {
   name: 'stdDeath',
   group: 'death',
   onDeath: function(killer) {
-    
+    this.fireEvent('on-death', killer, true)
+  }
+}
+
+Mixins.werewolf = {
+  name: 'werewolf',
+  group: 'werewolf',
+  beast: 0,
+  wolf: false,
+  transform: function() {
+    if (this.wolf) {
+      this.color = 'white'
+    } else {
+      this.beast += 1
+      this.color = 'crimson'
+    }
   }
 }
 

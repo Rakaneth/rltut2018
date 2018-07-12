@@ -1,5 +1,5 @@
 let UI = {
-  messages = []
+  messages: []
 }
 
 UI.update = function(tag, val) {
@@ -9,7 +9,7 @@ UI.update = function(tag, val) {
 UI.updateSeen = function(objs) {
   let list = document.getElementById('seen')
   list.innerHTML = ''
-  for (obj of objs) {
+  for (let obj of objs) {
     let line = document.createElement('li')
     line.style = `color: ${obj.color}`
     line.innerText = `${obj.name} (${obj.glyph})`
@@ -19,6 +19,16 @@ UI.updateSeen = function(objs) {
 
 UI.addMessage = function(msg) {
   this.messages.push(msg)
+}
+
+UI.showMessages = function() {
+  let msg = document.getElementById('messages')
+  msg.innerHTML = ''
+  for (let m of this.messages.reverse()) {
+    let line = document.createElement('p')
+    line.innerText = m
+    msg.appendChild(line)
+  }
 }
 
 module.exports = UI

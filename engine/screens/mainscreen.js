@@ -2,6 +2,7 @@ const Screen = require('./screen')
 const ROT = require('rot-js')
 const GAME = require('../game')
 const UTILS = require ('../utils')
+const UI = require('../ui')
 
 let Main = new Screen('main')
 
@@ -58,6 +59,7 @@ Main.render = function(display) {
       display.draw(s.x, s.y, thing.glyph, thing.color)
     }
   })
+  UI.showMessages()
 }
 
 Main.handleInput = function(keyCode, shift) {

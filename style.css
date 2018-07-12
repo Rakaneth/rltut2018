@@ -16,3 +16,11 @@ body {
   max-width: 25%;
   margin: 0px 5px;
 }
+
+#messages {
+  overflow-y: scroll;
+  height: 50vh;
+  background-color: black;
+  border: 2px solid red;
+  color: white;
+}

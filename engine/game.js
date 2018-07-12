@@ -67,6 +67,7 @@ let GAME = {
   processAction: function(action, entity) {
     if (action.move) {
       entity.moveTo(action.move)
+      UI.addMessage(`${entity.name} moves to ${entity.locString()}`)
     } else if (action.screen) {
       this.setScreen(action.screen)
     }

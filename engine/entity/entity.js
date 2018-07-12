@@ -10,6 +10,7 @@ function Entity(opts) {
   this.desc = opts.desc || 'No description'
   this._mixins = {}
   this._groups = {}
+  this._events = opts.events || {}
   this.id = this.name + (counter++)
   let mixins = opts.mixins || [];
   for (let mixin of mixins) {
@@ -40,6 +41,14 @@ Entity.prototype.locString = function() {
 
 Entity.prototype.loc = function() {
   return {x: this.x, y: this.y}
+}
+
+Entity.prototype.fireEvent = function(event, ...args) {
+  if (this._events[event]) {
+    this._events[event].call(this, args)
+  } else {
+    throw new Error(`Event ${event} doesn't exist for entity ${this.id}`)
+  }
 }
 
 module.exports = Entity
