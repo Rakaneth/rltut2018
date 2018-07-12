@@ -10,12 +10,16 @@ let creatures = {
   bear: {
     name: 'bear',
     desc: 'A large bear',
+    glyph: 'B',
+    color: 'brown',
     smellDesc: 'Heavy fur and musk',
     mixins: [baseMove, vision, smell, life, stdDeath]
   },
   deer: {
     name: 'deer',
     desc: 'A swift buck',
+    glyph: 'D',
+    color: 'goldenrod',
     smellDesc: 'Soft fur, light musk',
     mixins: [baseMove, vision, life, stdDeath]
   }
@@ -24,7 +28,13 @@ let creatures = {
 let Factory = {}
 
 Factory.makeCreature = function(template) {
-  return new ENTITY(creatures[template])
+  let temp = creatures[template]
+  if (template === 'player') {
+    temp.layer = 3
+  } else {
+    temp.layer = 2
+  }
+  return new ENTITY(temp)
 }
 
 module.exports = Factory

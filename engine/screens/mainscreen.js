@@ -3,6 +3,7 @@ const ROT = require('rot-js')
 const GAME = require('../game')
 const UTILS = require ('../utils')
 const UI = require('../ui')
+const CMDS = require ('../entity/command')
 
 let Main = new Screen('main')
 
@@ -62,6 +63,7 @@ Main.render = function(display) {
   UI.showMessages()
 }
 
+/* DEPRECATED
 Main.handleInput = function(keyCode, shift) {
   switch (keyCode) {
     case ROT.VK_NUMPAD8:
@@ -89,6 +91,22 @@ Main.handleInput = function(keyCode, shift) {
     default:
       return {move: "NONE"}
   }
+}
+*/
+Main.cmds = {
+  [ROT.VK_NUMPAD8]: CMDS.moveCommand(GAME._player, "N"),
+  [ROT.VK_UP]: CMDS.moveCommand(GAME._player, "N"),
+  [ROT.VK_NUMPAD9]: CMDS.moveCommand(GAME._player, "ME"),
+  [ROT.VK_NUMPAD6]: CMDS.moveCommand(GAME._player, "E"),
+  [ROT.VK_RIGHT]: CMDS.moveCommand(GAME._player, "E"),
+  [ROT.VK_NUMPAD3]: CMDS.moveCommand(GAME._player, "SE"),
+  [ROT.VK_NUMPAD2]: CMDS.moveCommand(GAME._player, "S"),
+  [ROT.VK_DOWN]: CMDS.moveCommand(GAME._player, "S"),
+  [ROT.VK_NUMPAD1]: CMDS.moveCommand(GAME._player, "SW"),
+  [ROT.VK_NUMPAD4]: CMDS.moveCommand(GAME._player, "W"),
+  [ROT.VK_LEFT]: CMDS.moveCommand(GAME._player, "W"),
+  [ROT.VK_NUMPAD7]: CMDS.moveCommand(GAME._player, "NW"),
+  [ROT.VK_T]: CMDS.transformCommand(GAME._player)
 }
 
 module.exports = Main

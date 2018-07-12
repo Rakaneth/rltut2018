@@ -8,7 +8,7 @@ const Map = require('./map')
 let GAME = {
   _curScreen: null,
   _screens: {},
-  _player: null,
+  _player: FACTORY.makeCreature('player'),
   MAPW: 50,
   MAPH: 50,
   _display: null,
@@ -34,14 +34,19 @@ let GAME = {
     let screen = document.getElementById("screen")
     screen.appendChild(this._display.getContainer())
     window.addEventListener("keydown", (e) => {
-      let action = g._curScreen.handleInput(e.keyCode, e.shiftKey)
-      g.processAction(action, g._player)
+      g._curScreen.handleInput(e.keyCode, e.shiftKey)
+      g.update()
     })
-    this._player = FACTORY.makeCreature('player'),
     this._map = new Map()
     this.addEntity(this._player)
-    let start = this._map.randomFloor()
-    this._player.move(start.x, start.y)
+    this.seed(this._player)
+    let choices = ['bear', 'deer']
+    for (let i=0; i<50; i++) {
+      let animalBase = choices.random()
+      let animal = FACTORY.makeCreature(animalBase)
+      this.addEntity(animal)
+      this.seed(animal)
+    }
     this.setUp = true
   },
   register: function(...screens) {
@@ -59,21 +64,18 @@ let GAME = {
       this.update()
     }
   },
-  processAction: function(action, entity) {
-    if (action.move) {
-      entity.moveTo(action.move)
-      UI.addMessage(`${entity.name} moves to ${entity.locString()}`)
-    } else if (action.screen) {
-      this.setScreen(action.screen)
-    } else if (action.shapeshift) {
-      entity.transform()
-    }
-    this.update()
-  },
   forEachThing: function(calbak) {
     for (let thing of Object.values(this._things)) {
       calbak(thing)
     }
+  },
+  seed: function(entity) {
+    let start = this._map.randomFloor()
+    entity.x = start.x
+    entity.y = start.y
+  },
+  thingsAt: function(x, y) {
+    return Object.values(this._things).filter(thing => thing.x === x && thing.y === y)
   }
 }
 

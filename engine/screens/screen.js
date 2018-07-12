@@ -15,7 +15,13 @@ Screen.prototype.render = function(display) {
 }
 
 Screen.prototype.handleInput = function(keyCode, shift) {
-  console.log(`Keycode ${keyCode} pressed.${shift ? " Shift held down." : ""}`)
+  if (shift && this.shiftCmds && this.shiftCmds[keyCode]) {
+    this.shiftCmds[keyCode]()
+  } else if (this.cmds[keyCode]) {
+    this.cmds[keyCode]()
+  } else {
+    console.log(`Unhandled key ${keyCode} on screen ${this.name}`)
+  }
 }
 
 module.exports = Screen
