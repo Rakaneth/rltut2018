@@ -1,3 +1,15 @@
+## 7/12/18
+
+Tested some of the mixins - they work - and refactored input to use the Command pattern, since it's so straightforward to do with first-class objects.
+
+### Combat (not implemented yet)
+
+I intend for the game to control with just one action button, outside of movement. Combat, such that will be, will be simple, with most creatures having one hit point, with the player and certain animals being the exception. The player will also be the only creature capable of recovering. I intend for LOS/smell to provide most of the emergent gameplay, with the player being forced to take advantage of his superior senses to take down prey, as well as manage time spent in werewolf form.
+
+### The Werewolf (partially implemented)
+
+Now that I've gone and mentioned it, this is probably a good time to go over the main premise of the game. The player is a werewolf, and the game starts on a Blood Moon night where his curse threatens to take his humanity forever. The game focuses on the one night and what the player does with it. The more time he spends as a werewolf, the closer he comes to the Wolf; the more time he spends in human form, the closer he comes to humanity. The player cannot engage in any combat at all in human form, and cannot talk to NPCs in werewolf form (which he will need to do to get the best ending). If at any point the player's Wolf rating gets to 100, the game ends.
+
 ## 7/11/18
 
 Drama and work have taken over my life for the time being, so progress may be slow. I've added some more mixins for my entities to use, but I don't have the energy to wire them up to test.
