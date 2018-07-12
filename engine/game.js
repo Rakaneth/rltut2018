@@ -1,8 +1,7 @@
 //Game state
 
 const {Display} = require('rot-js')
-const {baseMove} = require('./entity/mixins')
-const Entity = require ('./entity/entity')
+const FACTORY = require('./entity/factory')
 const UI = require('./ui')
 const Map = require('./map')
 
@@ -38,11 +37,7 @@ let GAME = {
       let action = g._curScreen.handleInput(e.keyCode, e.shiftKey)
       g.processAction(action, g._player)
     })
-    this._player = new Entity({
-      name: 'player',
-      desc: 'The player.',
-      mixins: [baseMove]
-    }),
+    this._player = FACTORY.makeCreature('player'),
     this._map = new Map()
     this.addEntity(this._player)
     let start = this._map.randomFloor()
@@ -70,6 +65,8 @@ let GAME = {
       UI.addMessage(`${entity.name} moves to ${entity.locString()}`)
     } else if (action.screen) {
       this.setScreen(action.screen)
+    } else if (action.shapeshift) {
+      entity.transform()
     }
     this.update()
   },

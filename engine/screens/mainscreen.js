@@ -84,6 +84,8 @@ Main.handleInput = function(keyCode, shift) {
       return {move: "W"}
     case ROT.VK_NUMPAD7:
       return {move: "NW"}
+    case ROT.VK_T:
+      return {shapeshift: true}
     default:
       return {move: "NONE"}
   }

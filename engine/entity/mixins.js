@@ -1,6 +1,7 @@
 let Mixins = {}
 const {DIRS} = require ('../constants')
 const UTILS = require('../utils')
+const UI = require('../ui')
 
 Mixins.baseMove = {
   name: 'baseMove',
@@ -71,10 +72,13 @@ Mixins.werewolf = {
   transform: function() {
     if (this.wolf) {
       this.color = 'white'
+      this.wolf = false
     } else {
       this.beast += 1
       this.color = 'crimson'
+      this.wolf = true
     }
+    UI.addMessage(`${this.name} transforms to ${this.wolf ? 'beast' : 'human'} form.`)
   }
 }
 
