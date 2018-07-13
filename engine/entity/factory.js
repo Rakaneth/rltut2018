@@ -22,6 +22,10 @@ let creatures = {
     glyph: 'B',
     color: 'brown',
     smellDesc: 'Heavy fur and musk',
+    stench: 4,
+    hp: 2,
+    speed: 3,
+    dmg: 1,
     mixins: [baseMove, vision, smell, life, stdDeath, musk]
   },
   deer: {
@@ -30,7 +34,16 @@ let creatures = {
     glyph: 'D',
     color: 'goldenrod',
     smellDesc: 'Soft fur, light musk',
+    stench: 3,
     mixins: [baseMove, vision, life, stdDeath, musk]
+  },
+  rabbit: {
+    name: 'rabbit',
+    desc: 'A small rabbit',
+    glyph: 'R',
+    color: 'white',
+    smellDesc: 'Earth and extremely light musk',
+    stench: 1
   }
 }
 

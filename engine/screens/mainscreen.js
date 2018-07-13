@@ -34,12 +34,16 @@ function inView(screenX, screenY) {
 Main.render = function(display) {
   let m = GAME._map
   let tile, s
-  m.fov.compute(GAME._player.x, GAME._player.y, 10, function(x, y, r, v) {
+  GAME._player.visibleThings = []
+  m.fov.compute(GAME._player.x, GAME._player.y, 5, function(x, y, r, v) {
     tile = m.getTile(x, y)
     s = toScreen(m, x, y)
     if (tile.glyph && inView(s.x, s.y)) {
       display.draw(s.x, s.y, tile.glyph, tile.color)
     }
+    GAME.thingsAt(x, y).forEach((thing => {
+      GAME._player.visibleThings.push(thing)
+    }))
   })
   /*
   for (x=0; x<GAME.MAPW; x++) {
@@ -57,7 +61,11 @@ Main.render = function(display) {
   things.forEach((thing) => {
     let s = toScreen(m, thing.x, thing.y)
     if (inView(s.x, s.y)) {
-      display.draw(s.x, s.y, thing.glyph, thing.color)
+      if (GAME._player.canSee(thing)) {
+        display.draw(s.x, s.y, thing.glyph, thing.color)
+      } else if (GAME._player.canSmell(thing)) {
+        display.draw(s.x, s.y, '*', thing.color)
+      }
     }
   })
   UI.showMessages()
