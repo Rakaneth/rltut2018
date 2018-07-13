@@ -96,7 +96,7 @@ Main.handleInput = function(keyCode, shift) {
 Main.cmds = {
   [ROT.VK_NUMPAD8]: CMDS.moveCommand(GAME._player, "N"),
   [ROT.VK_UP]: CMDS.moveCommand(GAME._player, "N"),
-  [ROT.VK_NUMPAD9]: CMDS.moveCommand(GAME._player, "ME"),
+  [ROT.VK_NUMPAD9]: CMDS.moveCommand(GAME._player, "NE"),
   [ROT.VK_NUMPAD6]: CMDS.moveCommand(GAME._player, "E"),
   [ROT.VK_RIGHT]: CMDS.moveCommand(GAME._player, "E"),
   [ROT.VK_NUMPAD3]: CMDS.moveCommand(GAME._player, "SE"),

@@ -1,11 +1,20 @@
-const {baseMove, vision, smell, life, stdDeath, werewolf} = require('./mixins')
+const {
+  baseMove, 
+  vision, 
+  smell, 
+  life, 
+  stdDeath, 
+  werewolf, 
+  musk, 
+  wolfMusk
+} = require('./mixins')
 const ENTITY = require('./entity')
 
 let creatures = {
   player: {
     name: 'Player',
     desc: 'The player',
-    mixins: [baseMove, vision, smell, life, werewolf]
+    mixins: [baseMove, vision, smell, life, werewolf, wolfMusk]
   },
   bear: {
     name: 'bear',
@@ -13,7 +22,7 @@ let creatures = {
     glyph: 'B',
     color: 'brown',
     smellDesc: 'Heavy fur and musk',
-    mixins: [baseMove, vision, smell, life, stdDeath]
+    mixins: [baseMove, vision, smell, life, stdDeath, musk]
   },
   deer: {
     name: 'deer',
@@ -21,7 +30,7 @@ let creatures = {
     glyph: 'D',
     color: 'goldenrod',
     smellDesc: 'Soft fur, light musk',
-    mixins: [baseMove, vision, life, stdDeath]
+    mixins: [baseMove, vision, life, stdDeath, musk]
   }
 }
 

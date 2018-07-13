@@ -1,3 +1,9 @@
+## 7/13/18
+
+Creatures now have a defined 'stench' rating which makes them easier to smell at longer ranges. An unwashed human (such as the player's human form) has a stench rating of 2. Rotting corpses have a stench rating of 5.
+
+Also, the FOV correctly includes border forest tiles that block further vision.
+
 ## 7/12/18
 
 Tested some of the mixins - they work - and refactored input to use the Command pattern, since it's so straightforward to do with first-class objects.
@@ -20,7 +26,7 @@ With flood-filling, I've managed to implement regions for my FOV; the player can
 
 ## 6/29/18
 
-Finished up Weeks 1 and 2, getting a rendered map under a moving @. Going with Simplex noise for now. `Array.fill` is *the worst* for filling a 2D array; all the arrays were *the same object,* causing my maps to look weird (and causing me to initially thing that I had somehow used `ROT.Noise.Simplex` incorrectly).
+Finished up Weeks 1 and 2, getting a rendered map under a moving @. Going with Simplex noise for now. `Array.fill` is *the worst* for filling a 2D array; all the arrays were *the same object,* causing my maps to look weird (and causing me to initially think that I had somehow used `ROT.Noise.Simplex` incorrectly).
 
 ## 6/28/18
 

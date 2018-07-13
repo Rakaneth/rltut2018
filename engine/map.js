@@ -120,7 +120,7 @@ Map.prototype.isRegionBorder = function(x, y) {
     return this.getRegion(p.x, p.y) !== this.getRegion(x, y) && 
     this.getRegion(x, y) > 0 &&
     this.getRegion(p.x, p.y) > 0
-  })
+  }) && this.getTile(x, y).region === 'forest'
 }
 
 

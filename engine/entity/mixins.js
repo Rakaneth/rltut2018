@@ -29,7 +29,25 @@ Mixins.smell = {
   name: 'smell',
   group: 'vision',
   canSmell: function(entity) {
-    return UTILS.distancePts(this.loc(), entity.loc()) <= this.nosePower
+    let stench = entity.hasMixin('musk') ? entity.stench : 0
+    return !!stench && (UTILS.distancePts(this.loc(), entity.loc()) <= this.nosePower + stench)
+  }
+}
+
+Mixins.musk = {
+  name: 'musk',
+  group: 'musk',
+  init: function(opts) {
+    this.smellDesc = opts.smellDesc || "No scent in particular."
+    this.stench = opts.stench || 1
+  }
+}
+
+Mixins.wolfMusk = {
+  name: 'musk',
+  group: 'musk',
+  get stench() {
+    return 2 + this.beastBonus
   }
 }
 
@@ -47,7 +65,7 @@ Mixins.life = {
     }
   },
   init: function(opts) {
-    this._hp = opts ? opts.hp : 1
+    this._hp = opts.hp || 1
   }
 }
 
@@ -76,10 +94,10 @@ Mixins.werewolf = {
     UI.addMessage(`${this.name} transforms to ${this.wolf ? 'beast' : 'human'} form.`)
   },
   get beastBonus() {
-    return Math.floor(this.beast / 10)
+    return this.wolf ? Math.floor(this.beast / 10) : 0
   },
   get nosePower() {
-    return 3 + this.beastBonus
+    return 5 + this.beastBonus
   }
 }
 
