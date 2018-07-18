@@ -7,7 +7,7 @@ Mixins.baseMove = {
   name: 'baseMove',
   group: 'move',
   tryMove: function(x, y) {
-    this.fireEvent('onmove', x, y)
+    this.fireEvent('move', x, y)
   },
   moveTo: function(direction) {
     let delta = DIRS[direction]
@@ -72,7 +72,7 @@ Mixins.stdDeath = {
   name: 'stdDeath',
   group: 'death',
   onDeath: function(killer) {
-    this.fireEvent('ondeath', killer, true)
+    this.fireEvent('death', killer, true)
   }
 }
 

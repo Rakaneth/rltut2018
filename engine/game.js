@@ -1,9 +1,6 @@
 //Game state
-
-
 const UI = require('./ui')
 const Entity = require('./entity/entity')
-
 
 let GAME = {
   _curScreen: null,

@@ -9,12 +9,38 @@ const {
   wolfMusk
 } = require('./mixins')
 const ENTITY = require('./entity')
+const GAME = require ('../game')
+const UI = require('../ui')
+
+let baseMoveEvt = function(x, y) {
+  let stuff = GAME.thingsAt(x, y)
+  if (stuff.size > 0) {
+    stuff.forEach(thing => {
+      this.fireEvent('interact', thing)
+    })
+    return true
+  } else if (GAME._map.getTile(x, y).walk) {
+    this.x = x
+    this.y = y
+    return true
+  } else {
+    return false
+  }
+}
+
+let testInteract = function(entity) {
+  UI.addMessage(`${this.name} bumped into ${entity.name}`)
+}
 
 let creatures = {
   player: {
     name: 'Player',
     desc: 'The player',
     mixins: [baseMove, vision, smell, life, werewolf, wolfMusk],
+    events: {
+      move: baseMoveEvt,
+      interact: testInteract
+    }
   },
   bear: {
     name: 'bear',
@@ -26,7 +52,10 @@ let creatures = {
     hp: 2,
     speed: 3,
     dmg: 1,
-    mixins: [baseMove, vision, smell, life, stdDeath, musk]
+    mixins: [baseMove, vision, smell, life, stdDeath, musk],
+    events: {
+      move: baseMoveEvt
+    }
   },
   deer: {
     name: 'deer',
@@ -35,7 +64,10 @@ let creatures = {
     color: 'goldenrod',
     smellDesc: 'Soft fur, light musk',
     stench: 3,
-    mixins: [baseMove, vision, life, stdDeath, musk]
+    mixins: [baseMove, vision, life, stdDeath, musk],
+    events: {
+      move: baseMoveEvt
+    }
   },
   rabbit: {
     name: 'rabbit',
@@ -43,7 +75,10 @@ let creatures = {
     glyph: 'R',
     color: 'white',
     smellDesc: 'Earth and extremely light musk',
-    stench: 1
+    stench: 1,
+    events: {
+      move: baseMoveEvt
+    }
   }
 }
 
