@@ -30,7 +30,7 @@ let GAME = {
   },
   init: function(){
     g = this
-    this._display = new Display({width: this.MAPW, height: this.MAPH, fontSize: 16})
+    this._display = new Display({width: this.MAPW, height: this.MAPH, fontSize: 12})
     let screen = document.getElementById("screen")
     screen.appendChild(this._display.getContainer())
     window.addEventListener("keydown", (e) => {
