@@ -1,14 +1,14 @@
 //Game state
 
-const {Display} = require('rot-js')
-const FACTORY = require('./entity/factory')
+
 const UI = require('./ui')
-const Map = require('./map')
+const Entity = require('./entity/entity')
+
 
 let GAME = {
   _curScreen: null,
   _screens: {},
-  _player: FACTORY.makeCreature('player'),
+  _player: new Entity(),
   MAPW: 50,
   MAPH: 50,
   _display: null,
@@ -29,33 +29,7 @@ let GAME = {
     delete this._things[entity.id]
   },
   init: function(){
-    let g = this
-    this._display = new Display({width: this.MAPW, height: this.MAPH, fontSize: 12})
-    let screen = document.getElementById("screen")
-    screen.appendChild(this._display.getContainer())
-    window.addEventListener("keydown", (e) => {
-      g._curScreen.handleInput(e.keyCode, e.shiftKey)
-      g.update()
-    })
-    window.addEventListener('click', (e) => {
-      let [mx, my] = g._display.eventToPosition(e)
-      g._curScreen.handleMouseClick(mx, my, e.button)
-    })
-    window.addEventListener('mouseover', (e) => {
-      let [mx, my] = g._display.eventToPosition(e)
-      g._curScreen.handleMouseover(mx, my)
-    })
-    this._map = new Map()
-    this.addEntity(this._player)
-    this.seed(this._player)
-    let choices = ['bear', 'deer']
-    for (let i=0; i<50; i++) {
-      let animalBase = choices.random()
-      let animal = FACTORY.makeCreature(animalBase)
-      this.addEntity(animal)
-      this.seed(animal)
-    }
-    this.setUp = true
+
   },
   register: function(...screens) {
     for (let screen of screens) {

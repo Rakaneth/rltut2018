@@ -1,6 +1,7 @@
 let counter = 0
 
 function Entity(opts) {
+  opts = opts || {}
   this.x = 0
   this.y = 0
   this.glyph = opts.glyph || '@'
