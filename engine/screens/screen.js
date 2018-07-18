@@ -24,4 +24,10 @@ Screen.prototype.handleInput = function(keyCode, shift) {
   }
 }
 
+Screen.prototype.handleMouseover = function(mx, my) {}
+
+Screen.prototype.handleMouseClick = function(mx, my, btn) {
+  console.log(`Button ${btn} pressed at ${mx},${my}`)
+}
+
 module.exports = Screen

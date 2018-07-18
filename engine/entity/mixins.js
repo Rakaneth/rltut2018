@@ -6,13 +6,12 @@ const UI = require('../ui')
 Mixins.baseMove = {
   name: 'baseMove',
   group: 'move',
-  move: function(x, y) {
-    this.x = x
-    this.y = y
+  tryMove: function(x, y) {
+    this.fireEvent('onmove', x, y)
   },
   moveTo: function(direction) {
     let delta = DIRS[direction]
-    this.move(this.x + delta[0], this.y + delta[1])
+    this.tryMove(this.x + delta[0], this.y + delta[1])
   }
 }
 
@@ -73,7 +72,7 @@ Mixins.stdDeath = {
   name: 'stdDeath',
   group: 'death',
   onDeath: function(killer) {
-    this.fireEvent('on-death', killer, true)
+    this.fireEvent('ondeath', killer, true)
   }
 }
 

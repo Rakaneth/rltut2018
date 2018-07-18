@@ -14,7 +14,7 @@ let creatures = {
   player: {
     name: 'Player',
     desc: 'The player',
-    mixins: [baseMove, vision, smell, life, werewolf, wolfMusk]
+    mixins: [baseMove, vision, smell, life, werewolf, wolfMusk],
   },
   bear: {
     name: 'bear',

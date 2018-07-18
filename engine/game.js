@@ -29,13 +29,21 @@ let GAME = {
     delete this._things[entity.id]
   },
   init: function(){
-    g = this
+    let g = this
     this._display = new Display({width: this.MAPW, height: this.MAPH, fontSize: 12})
     let screen = document.getElementById("screen")
     screen.appendChild(this._display.getContainer())
     window.addEventListener("keydown", (e) => {
       g._curScreen.handleInput(e.keyCode, e.shiftKey)
       g.update()
+    })
+    window.addEventListener('click', (e) => {
+      let [mx, my] = g._display.eventToPosition(e)
+      g._curScreen.handleMouseClick(mx, my, e.button)
+    })
+    window.addEventListener('mouseover', (e) => {
+      let [mx, my] = g._display.eventToPosition(e)
+      g._curScreen.handleMouseover(mx, my)
     })
     this._map = new Map()
     this.addEntity(this._player)
