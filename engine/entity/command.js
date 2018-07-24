@@ -2,12 +2,12 @@ let GAME = require('../game')
 
 let Commands = {}
 
-Commands.moveCommand = function(entity, direction) {
-  return () => entity.moveTo(direction)
+Commands.moveCommand = function(direction) {
+  return (entity) => entity.moveTo(direction)
 }
 
-Commands.transformCommand = function(entity) {
-  return () => entity.transform()
+Commands.transformCommand = function() {
+  return (entity) => entity.transform()
 }
 
 Commands.changeScreenCommand = function(screen) {

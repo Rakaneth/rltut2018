@@ -46,7 +46,7 @@ Entity.prototype.loc = function() {
 
 Entity.prototype.fireEvent = function(event, ...args) {
   if (this._events[event]) {
-    this._events[event].call(this, args)
+    this._events[event].call(this, ...args)
   } else {
     throw new Error(`Event ${event} doesn't exist for entity ${this.id}`)
   }

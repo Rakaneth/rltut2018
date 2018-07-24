@@ -5,7 +5,6 @@ const Entity = require('./entity/entity')
 let GAME = {
   _curScreen: null,
   _screens: {},
-  _player: new Entity(),
   MAPW: 50,
   MAPH: 50,
   _display: null,
@@ -15,9 +14,9 @@ let GAME = {
   update: function()  {
     this._display.clear()
     this._curScreen.render(this._display)
-    UI.update('char-name', this._player.name)
-    UI.update('char-desc', this._player.desc)
-    UI.update('char-loc',  this._player.locString())
+    UI.update('char-name', this.player.name)
+    UI.update('char-desc', this.player.desc)
+    UI.update('char-loc',  this.player.locString())
   },
   addEntity: function(entity) {
     this._things[entity.id] = entity
@@ -55,6 +54,9 @@ let GAME = {
   },
   thingsAt: function(x, y) {
     return Object.values(this._things).filter(thing => thing.x === x && thing.y === y)
+  },
+  get player() {
+    return this._things['player']
   }
 }
 

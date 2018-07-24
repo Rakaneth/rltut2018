@@ -91,7 +91,11 @@ Factory.makeCreature = function(template) {
   } else {
     temp.layer = 2
   }
-  return new ENTITY(temp)
+  let foetus = new ENTITY(temp)
+  if (template === 'player') {
+    foetus.id = 'player'
+  }
+  return foetus
 }
 
 module.exports = Factory

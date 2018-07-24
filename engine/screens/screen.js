@@ -1,3 +1,5 @@
+let GAME = require('../game')
+
 function Screen(name) {
   this.name = name
 }
@@ -16,9 +18,9 @@ Screen.prototype.render = function(display) {
 
 Screen.prototype.handleInput = function(keyCode, shift) {
   if (shift && this.shiftCmds && this.shiftCmds[keyCode]) {
-    this.shiftCmds[keyCode]()
+    this.shiftCmds[keyCode](GAME.player)
   } else if (this.cmds[keyCode]) {
-    this.cmds[keyCode]()
+    this.cmds[keyCode](GAME.player)
   } else {
     console.log(`Unhandled key ${keyCode} on screen ${this.name}`)
   }
