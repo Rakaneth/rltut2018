@@ -24,8 +24,8 @@ UI.addMessage = function(msg) {
 UI.showMessages = function() {
   let msg = document.getElementById('messages')
   msg.innerHTML = ''
-  for (let m of this.messages.reverse()) {
-    let line = document.createElement('p')
+  for (let m of this.messages.slice().reverse()) {
+    let line = document.createElement('li')
     line.innerText = m
     msg.appendChild(line)
   }

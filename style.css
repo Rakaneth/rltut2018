@@ -23,4 +23,5 @@ body {
   background-color: black;
   border: 2px solid red;
   color: white;
+  line-height: 0.9;
 }

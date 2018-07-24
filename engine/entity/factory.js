@@ -14,7 +14,7 @@ const UI = require('../ui')
 
 let baseMoveEvt = function(x, y) {
   let stuff = GAME.thingsAt(x, y)
-  if (stuff.size > 0) {
+  if (stuff.length > 0) {
     stuff.forEach(thing => {
       this.fireEvent('interact', thing)
     })
