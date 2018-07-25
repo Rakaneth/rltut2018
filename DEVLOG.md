@@ -1,3 +1,11 @@
+## 7/24/18
+
+I am much farther behind than I want to be - for work reasons, but also because of some refactoring. `game.js` no longer depends on `factory.js`, so I can now use functions from `game.js` in `factory.js` without causing a circular dependency. This allows me to query the gamestate in my mixins.
+
+There is also a rudimentary event system in place to allow objects to communicate with each other, as well as a message log.
+
+The refactoring did not go well at first, as I had to also refactor how commands worked. I've fixed everything to have a running game again, so now I can get back to catching up - I have a semi-free weekend coming up, and I hope to get caught up then.
+
 ## 7/13/18
 
 Creatures now have a defined 'stench' rating which makes them easier to smell at longer ranges. An unwashed human (such as the player's human form) has a stench rating of 2. Rotting corpses have a stench rating of 5.
