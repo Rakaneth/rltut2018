@@ -14,7 +14,7 @@ I am following along with the roguelike tutorial given [here](https://www.reddit
 - [x] Week 1
 - [x] Week 2
 - [x] Week 3
-- [ ] Week 4
+- [x] Week 4
 - [ ] Week 5
 - [ ] Week 6
 - [ ] Week 7

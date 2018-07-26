@@ -15,6 +15,12 @@ Mixins.baseMove = {
   }
 }
 
+Mixins.player =  {
+  name: 'player',
+  group: 'actor',
+  isPlayer: true
+}
+
 Mixins.vision = {
   name: 'vision',
   group: 'vision',
@@ -92,12 +98,30 @@ Mixins.werewolf = {
 
 Mixins.foodChain = {
   name: 'food-chain',
-  desc: 'food-chain',
+  group: 'food-chain',
   isPredator: function(entity) {
     return this.chainLevel > entity.chainLevel
   },
   init: function(opts) {
     this.chainLevel = opts.chainLevel || 0
+  }
+}
+
+Mixins.inventory = {
+  name: 'inventory',
+  group: 'inventory',
+  get bagsFull() {
+    return !this.inventory || this.inventory.length >= this.capacity
+  },
+  pickUp: function(item) {
+    this.fireEvent('pickup', item)
+  },
+  drop: function(item) {
+    this.fireEvent('drop', item)
+  },
+  init: function(opts) {
+    this.inventory = opts.inventory || []
+    this.capacity = opts.capacity || 2
   }
 }
 

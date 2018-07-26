@@ -1,6 +1,10 @@
 ## 7/26/18
 
-FINALLY finished basic combat. The player can now run around and eat the various denizens of the forest. This catches me up to Week 3.
+FINALLY finished basic combat. The player can now run around and eat the various denizens of the forest. This catches me up to Week 4. Added inventory and player mixins (which only the player will use). 
+
+### Range
+
+Only NPCs will have range (werewolf hunters). With my composition-based design, though, it should not be difficult to extend this to the player at need.
 
 ## 7/24/18
 

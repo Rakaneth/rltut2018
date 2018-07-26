@@ -57,6 +57,9 @@ let GAME = {
   },
   get player() {
     return this._things['player']
+  },
+  playerVisible(entity) {
+    return this.player.canSee(entity)
   }
 }
 

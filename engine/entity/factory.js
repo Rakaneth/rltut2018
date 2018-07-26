@@ -6,7 +6,9 @@ const {
   werewolf, 
   musk, 
   wolfMusk,
-  foodChain
+  foodChain,
+  inventory,
+  player
 } = require('./mixins')
 const ENTITY = require('./entity')
 const GAME = require ('../game')
@@ -46,14 +48,54 @@ let baseDeath = function(killer) {
   GAME.removeEntity(this)
 }
 
+let basePickup = function(item) {
+  if (this.bagsFull && this.isPlayer) {
+    UI.addMessage(`Cannot pick up ${item.name}; drop other items first.`)
+  } else if (!this.bagsFull) {
+    this.inventory.push(item)
+    if (this.isPlayer) {
+      UI.addMessage(`You pick up the ${item.name}.`)
+    } else if (GAME.playerVisible(this)) {
+      UI.addMessage(`${this.name} picks up ${item.name}.`)
+    }
+    GAME.removeEntity(item)
+  }
+}
+
+let baseDrop = function(item) {
+  this.inventory = this.inventory.filter(i => i.id !== item.id)
+  item.x = this.x
+  item.y = this.y
+  let toWrite
+  if (this.isPlayer) {
+    toWrite = `You drop the ${item.name}.`
+  } else if (GAME.playerVisible(this)) {
+    toWrite = `${this.name} drops the ${item.name}.`
+  }
+  GAME.addEntity(item)
+  UI.addMessage(toWrite)
+}
+
 let creatures = {
   player: {
     name: 'Player',
     desc: 'The player',
-    mixins: [baseMove, vision, smell, life, werewolf, wolfMusk, foodChain],
+    mixins: [
+      baseMove, 
+      vision, 
+      smell, 
+      life, 
+      werewolf, 
+      wolfMusk, 
+      foodChain, 
+      inventory,
+      player
+    ],
     events: {
       move: baseMoveEvt,
-      interact: predatorInteract
+      interact: predatorInteract,
+      pickup: basePickup,
+      drop: baseDrop,
     },
     chainLevel: 3
   },
@@ -67,7 +109,14 @@ let creatures = {
     hp: 2,
     speed: 3,
     dmg: 1,
-    mixins: [baseMove, vision, smell, life, musk, foodChain],
+    mixins: [
+      baseMove, 
+      vision, 
+      smell, 
+      life, 
+      musk, 
+      foodChain
+    ],
     events: {
       move: baseMoveEvt,
       death: baseDeath
@@ -81,7 +130,13 @@ let creatures = {
     color: 'goldenrod',
     smellDesc: 'Soft fur, light musk',
     stench: 3,
-    mixins: [baseMove, vision, life, musk, foodChain],
+    mixins: [
+      baseMove, 
+      vision, 
+      life, 
+      musk, 
+      foodChain
+    ],
     events: {
       move: baseMoveEvt,
       death: baseDeath
@@ -94,7 +149,13 @@ let creatures = {
     color: 'white',
     smellDesc: 'Earth and extremely light musk',
     stench: 1,
-    mixins: [baseMove, vision, life, musk, foodChain],
+    mixins: [
+      baseMove, 
+      vision, 
+      life, 
+      musk, 
+      foodChain
+    ],
     events: {
       move: baseMoveEvt,
       death: baseDeath
