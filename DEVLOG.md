@@ -1,3 +1,7 @@
+## 7/26/18
+
+FINALLY finished basic combat. The player can now run around and eat the various denizens of the forest. This catches me up to Week 3.
+
 ## 7/13/18
 
 Creatures now have a defined 'stench' rating which makes them easier to smell at longer ranges. An unwashed human (such as the player's human form) has a stench rating of 2. Rotting corpses have a stench rating of 5.
