@@ -58,21 +58,11 @@ Mixins.life = {
     this._hp = Math.max(0, this._hp - amt)
     if (this._hp == 0) {
       this.alive = false
-      if (this.hasMixin('death')) {
-        this.onDeath(attacker)
-      }
+      this.fireEvent('death', attacker)
     }
   },
   init: function(opts) {
     this._hp = opts.hp || 1
-  }
-}
-
-Mixins.stdDeath = {
-  name: 'stdDeath',
-  group: 'death',
-  onDeath: function(killer) {
-    this.fireEvent('death', killer, true)
   }
 }
 
@@ -97,6 +87,17 @@ Mixins.werewolf = {
   },
   get nosePower() {
     return 5 + this.beastBonus
+  }
+}
+
+Mixins.foodChain = {
+  name: 'food-chain',
+  desc: 'food-chain',
+  isPredator: function(entity) {
+    return this.chainLevel > entity.chainLevel
+  },
+  init: function(opts) {
+    this.chainLevel = opts.chainLevel || 0
   }
 }
 

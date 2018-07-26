@@ -3,10 +3,10 @@ const {
   vision, 
   smell, 
   life, 
-  stdDeath, 
   werewolf, 
   musk, 
-  wolfMusk
+  wolfMusk,
+  foodChain
 } = require('./mixins')
 const ENTITY = require('./entity')
 const GAME = require ('../game')
@@ -32,15 +32,30 @@ let testInteract = function(entity) {
   UI.addMessage(`${this.name} bumped into ${entity.name}`)
 }
 
+let predatorInteract = function(entity) {
+  if (entity.hasMixin('food-chain') && this.isPredator(entity)) {
+    entity.takeDmg(1, this)
+    if (!entity.alive) {
+      UI.addMessage(`${this.name} devours the ${entity.name}.`)
+    }
+  }
+}
+
+let baseDeath = function(killer) {
+  UI.addMessage(`${killer.name} has slain the ${this.name}.`)
+  GAME.removeEntity(this)
+}
+
 let creatures = {
   player: {
     name: 'Player',
     desc: 'The player',
-    mixins: [baseMove, vision, smell, life, werewolf, wolfMusk],
+    mixins: [baseMove, vision, smell, life, werewolf, wolfMusk, foodChain],
     events: {
       move: baseMoveEvt,
-      interact: testInteract
-    }
+      interact: predatorInteract
+    },
+    chainLevel: 3
   },
   bear: {
     name: 'bear',
@@ -52,10 +67,12 @@ let creatures = {
     hp: 2,
     speed: 3,
     dmg: 1,
-    mixins: [baseMove, vision, smell, life, stdDeath, musk],
+    mixins: [baseMove, vision, smell, life, musk, foodChain],
     events: {
-      move: baseMoveEvt
-    }
+      move: baseMoveEvt,
+      death: baseDeath
+    },
+    chainLevel: 2
   },
   deer: {
     name: 'deer',
@@ -64,9 +81,10 @@ let creatures = {
     color: 'goldenrod',
     smellDesc: 'Soft fur, light musk',
     stench: 3,
-    mixins: [baseMove, vision, life, stdDeath, musk],
+    mixins: [baseMove, vision, life, musk, foodChain],
     events: {
-      move: baseMoveEvt
+      move: baseMoveEvt,
+      death: baseDeath
     }
   },
   rabbit: {
@@ -76,8 +94,10 @@ let creatures = {
     color: 'white',
     smellDesc: 'Earth and extremely light musk',
     stench: 1,
+    mixins: [baseMove, vision, life, musk, foodChain],
     events: {
-      move: baseMoveEvt
+      move: baseMoveEvt,
+      death: baseDeath
     }
   }
 }
