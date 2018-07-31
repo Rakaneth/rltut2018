@@ -7,6 +7,8 @@ const CMDS = require ('../entity/command')
 
 let Main = new Screen('main')
 
+Main.debug = true
+
 function cam(gameMap) {
   let calc = (p, m, s) => {
     return UTILS.clamp(p-s/2, 0, Math.max(0, m-s))
@@ -35,11 +37,18 @@ Main.render = function(display) {
   let m = GAME._map
   let tile, s
   GAME.player.visibleThings = []
-  m.fov.compute(GAME.player.x, GAME.player.y, 5, function(x, y, r, v) {
+  GAME._huntMap.compute(GAME.player.loc())
+  m.fov.compute(GAME.player.x, GAME.player.y, 15, function(x, y, r, v) {
     tile = m.getTile(x, y)
     s = toScreen(m, x, y)
     if (tile.glyph && inView(s.x, s.y)) {
-      display.draw(s.x, s.y, tile.glyph, tile.color)
+      if (Main.debug) {
+        let v = GAME._huntMap.getValue(x, y)
+        let dv = v > 9 ? '*' : v
+        display.draw(s.x, s.y, dv, tile.color)
+      } else {
+        display.draw(s.x, s.y, tile.glyph, tile.color)
+      }
     }
     GAME.thingsAt(x, y).forEach((thing => {
       GAME.player.visibleThings.push(thing)
@@ -58,6 +67,7 @@ Main.render = function(display) {
       }
     }
   })
+
   UI.showMessages()
 }
 

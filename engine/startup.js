@@ -4,6 +4,7 @@ const MAIN = require('./screens/mainscreen')
 const {Display} = require('rot-js')
 const FACTORY = require('./entity/factory')
 const Map = require('./map')
+const DMap = require('./dijkstra')
 
 window.onload = () => {
   GAME.register(TITLE, MAIN)
@@ -26,6 +27,8 @@ window.onload = () => {
   let player = FACTORY.makeCreature('player')
   GAME.addEntity(player)
   GAME.seed(player)
+  GAME._huntMap = new DMap(GAME._map, [GAME.player.loc()])
+  GAME._fleeMap = GAME._huntMap.fleeMap()
   let choices = ['bear', 'deer', 'rabbit']
   for (let i=0; i<50; i++) {
     let animalBase = choices.random()

@@ -10,6 +10,9 @@ let GAME = {
   _display: null,
   _things: {},
   _map: {},
+  _fleeMap: {},
+  _huntMap: {},
+  _rangeMap: {},
   setUp: false,
   update: function()  {
     this._display.clear()
