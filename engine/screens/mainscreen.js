@@ -7,7 +7,7 @@ const CMDS = require ('../entity/command')
 
 let Main = new Screen('main')
 
-Main.debug = true
+Main.debug = false
 
 function cam(gameMap) {
   let calc = (p, m, s) => {

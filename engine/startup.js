@@ -6,9 +6,16 @@ const FACTORY = require('./entity/factory')
 const Map = require('./map')
 const DMap = require('./dijkstra')
 
+function tileOffsets(x, y) {
+  return [(x + 1) * 16, (y + 4)* 16]
+}
+
 window.onload = () => {
   GAME.register(TITLE, MAIN)
-  GAME._display = new Display({width: GAME.MAPW, height: GAME.MAPH, fontSize: 12})
+  let tileSet = document.createElement('img')
+  tileSet.src = "Scroll-o-Sprites.png"
+  let displayOpts = {width: GAME.MAPW, height: GAME.MAPH, fontSize: 12}
+  GAME._display = new Display(displayOpts)
   let screen = document.getElementById("screen")
   screen.appendChild(GAME._display.getContainer())
   window.addEventListener("keydown", (e) => {
