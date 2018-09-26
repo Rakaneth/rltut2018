@@ -45,10 +45,6 @@ DMap.prototype.compute = function(...newGoals) {
   }
 }
 
-DMap.prototype.nextStep = function(x, y) {
-  let neis = this._map.neighbors(x, y)
-  return neis.filter(f => this.getValue(x, y) > this.getValue(f.x, f.y)).random()
-}
 
 DMap.prototype.fleeMap = function() {
   let newMap = new DMap(this._map, this._goals)
@@ -56,6 +52,17 @@ DMap.prototype.fleeMap = function() {
     v *= -1.2
   }
   return newMap
+}
+
+DMap.prototype.getNext = function(x, y) {
+  let neis = this._map.neighbors(x, y)
+  let curValue = this.getValue(x, y)
+  let cands = neis.filter(f => this.getValue(f.x, f.y) < curValue)
+  if (cands.length > 0) {
+    return cands.random()
+  } else {
+    return neis.random()
+  }
 }
 
 module.exports = DMap
