@@ -49,7 +49,7 @@ Mixins.musk = {
 }
 
 Mixins.wolfMusk = {
-  name: 'musk',
+  name: 'wolf-musk',
   group: 'musk',
   get stench() {
     return 2 + this.beastBonus
