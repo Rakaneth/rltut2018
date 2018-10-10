@@ -25,3 +25,21 @@ body {
   color: white;
   line-height: 0.9;
 }
+
+#beast {
+  float: left;
+  text-align: center;
+}
+
+#beast:after {
+  content: 'Beast:' attr(value);
+  display: inline;
+}
+
+#beast::-webkit-progress-bar {
+  background-color: red;
+}
+
+#beast::-moz-progress-bar {
+  background-color: red;
+}
