@@ -35,7 +35,7 @@ Mixins.smell = {
   group: 'vision',
   canSmell: function(entity) {
     let stench = entity.hasMixin('musk') ? entity.stench : 0
-    return !!stench && (UTILS.distancePts(this.loc(), entity.loc()) <= this.nosePower + stench)
+    return !!stench && (UTILS.distancePts(this.loc, entity.loc) <= this.nosePower + stench)
   }
 }
 

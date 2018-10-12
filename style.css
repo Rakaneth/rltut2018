@@ -31,15 +31,20 @@ body {
   text-align: center;
 }
 
+progress {
+  -webkit-appearance: none;
+}
+
 #beast:after {
   content: 'Beast:' attr(value);
   display: inline;
 }
 
 #beast::-webkit-progress-bar {
+  background-color: yellow;
+}
+
+#beast::-webkit-progress-value {
   background-color: red;
 }
 
-#beast::-moz-progress-bar {
-  background-color: red;
-}

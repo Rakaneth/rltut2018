@@ -12,8 +12,6 @@ function tileOffsets(x, y) {
 
 window.onload = () => {
   GAME.register(TITLE, MAIN)
-  let tileSet = document.createElement('img')
-  tileSet.src = "Scroll-o-Sprites.png"
   let displayOpts = {width: GAME.MAPW, height: GAME.MAPH, fontSize: 12}
   GAME._display = new Display(displayOpts)
   let screen = document.getElementById("screen")
@@ -34,7 +32,7 @@ window.onload = () => {
   let player = FACTORY.makeCreature('player')
   GAME.addEntity(player)
   GAME.seed(player)
-  GAME._huntMap = new DMap(GAME._map, [GAME.player.loc()])
+  GAME._huntMap = new DMap(GAME._map, [GAME.player.loc])
   GAME._fleeMap = GAME._huntMap.fleeMap()
   let choices = ['bear', 'deer', 'rabbit']
   for (let i=0; i<50; i++) {

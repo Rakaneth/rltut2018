@@ -37,7 +37,7 @@ Main.render = function(display) {
   let m = GAME._map
   let tile, s
   GAME.player.visibleThings = []
-  GAME._huntMap.compute(GAME.player.loc())
+  GAME._huntMap.compute(GAME.player.loc)
   m.fov.compute(GAME.player.x, GAME.player.y, 15, function(x, y, r, v) {
     tile = m.getTile(x, y)
     s = toScreen(m, x, y)
