@@ -17,7 +17,12 @@ function Entity(opts) {
   for (let mixin of mixins) {
     for (let prop in mixin) {
       if (prop !== 'init' && prop !== 'name' && prop !== 'group' && !this.hasOwnProperty(prop)) {
-        this[prop] = mixin[prop]
+        let propDesc = Object.getOwnPropertyDescriptor(mixin, prop)
+        if (propDesc) {
+          Object.defineProperty(this, prop, propDesc)
+        } else {
+          this[prop] = mixin[prop]
+        }
       }
     }
     this._mixins[mixin.name] = true
