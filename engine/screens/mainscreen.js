@@ -69,6 +69,7 @@ Main.render = function(display) {
   })
 
   UI.showMessages()
+  UI.updateSeen(GAME.player.visibleThings)
 }
 
 Main.cmds = {
