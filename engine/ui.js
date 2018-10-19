@@ -31,4 +31,9 @@ UI.showMessages = function() {
   }
 }
 
+UI.updateBeast = function(val) {
+  let beast = document.getElementById('beast')
+  beast.setAttribute('value', val);
+}
+
 module.exports = UI
