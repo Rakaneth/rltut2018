@@ -1,3 +1,9 @@
+## 10/24/18
+
+Picked this back up again. Despite not finishing in the tutorial time allotted, I'm still determined to complete this because I want this concept to be given form. 
+
+Prepared the gamestate for scheduling and the engine - going with a Speed scheduler. Also cleaned up Entity.loc.
+
 ## 7/26/18
 
 FINALLY finished basic combat. The player can now run around and eat the various denizens of the forest. This catches me up to Week 4. Added inventory and player mixins (which only the player will use). 

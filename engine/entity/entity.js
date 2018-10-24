@@ -46,7 +46,11 @@ Entity.prototype.locString = function() {
 }
 
 Object.defineProperty(Entity.prototype, 'loc', {
-  get: function() { return {x: this.x, y: this.y}}
+  get: function() { return {x: this.x, y: this.y}},
+  set: function(pt) { 
+    this.x = pt.x
+    this.y = pt.y
+  }
 })
 
 Entity.prototype.fireEvent = function(event, ...args) {

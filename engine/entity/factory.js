@@ -22,8 +22,7 @@ let baseMoveEvt = function(x, y) {
     })
     return true
   } else if (GAME._map.getTile(x, y).walk) {
-    this.x = x
-    this.y = y
+    this.loc = {x, y}
     return true
   } else {
     return false

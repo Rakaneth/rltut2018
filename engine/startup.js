@@ -41,6 +41,7 @@ window.onload = () => {
     GAME.addEntity(animal)
     GAME.seed(animal)
   }
+  GAME.initEngine()
   GAME.setUp = true
   GAME.setScreen('title')
 }

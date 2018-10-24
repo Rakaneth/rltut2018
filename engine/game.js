@@ -1,6 +1,7 @@
 //Game state
 const UI = require('./ui')
 const Entity = require('./entity/entity')
+const ROT = require('rot-js')
 
 let GAME = {
   _curScreen: null,
@@ -14,6 +15,8 @@ let GAME = {
   _huntMap: {},
   _rangeMap: {},
   setUp: false,
+  scheduler: null,
+  engine: null,
   update: function()  {
     this._display.clear()
     this._curScreen.render(this._display)
@@ -25,10 +28,24 @@ let GAME = {
     this._things[entity.id] = entity
   },
   removeEntity: function(entity) {
+    this.unschedule(entity)
     delete this._things[entity.id]
   },
-  init: function(){
-
+  initEngine: function() {
+    this.scheduler = new ROT.Scheduler.Speed()
+    this.engine = new ROT.Engine(this.scheduler)
+  },
+  schedule: function(entity) {
+    this.scheduler.add(entity, true)
+  },
+  unschedule: function(entity) {
+    this.scheduler.remove(entity)
+  },
+  pause: function() {
+    this.engine.pause()
+  },
+  resume: function() {
+    this.engine.resume()
   },
   register: function(...screens) {
     for (let screen of screens) {
@@ -51,9 +68,7 @@ let GAME = {
     }
   },
   seed: function(entity) {
-    let start = this._map.randomFloor()
-    entity.x = start.x
-    entity.y = start.y
+    entity.loc = this._map.randomFloor()
   },
   thingsAt: function(x, y) {
     return Object.values(this._things).filter(thing => thing.x === x && thing.y === y)
