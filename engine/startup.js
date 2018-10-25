@@ -20,7 +20,7 @@ window.onload = () => {
     GAME._curScreen.handleInput(e.keyCode, e.shiftKey)
     GAME.update()
   })
-  window.addEventListener('click', (e) => {
+  screen.addEventListener('click', (e) => {
     let [mx, my] = GAME._display.eventToPosition(e)
     GAME._curScreen.handleMouseClick(mx, my, e.button)
   })
