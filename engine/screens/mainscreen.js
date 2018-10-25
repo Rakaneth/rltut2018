@@ -38,7 +38,7 @@ Main.render = function(display) {
   let tile, s
   GAME._huntMap.compute(GAME.player.loc)
   GAME.player.visibleThings = []
-  m.fov.compute(GAME.player.x, GAME.player.y, 15, function(x, y, r, v) {
+  m.fov.compute(GAME.player.x, GAME.player.y, 6, function(x, y, r, v) {
     tile = m.getTile(x, y)
     s = toScreen(m, x, y)
     if (tile.glyph && inView(s.x, s.y)) {
@@ -71,6 +71,19 @@ Main.render = function(display) {
   UI.showMessages()
   UI.updateSeen(GAME.player.visibleThings)
   UI.updateBeast(GAME.player.beast)
+}
+
+Main.handleMouseover = function(mx, my) {
+  if (mx > 0 && my > 0) {
+    let w = toMap(GAME._map, mx, my)
+    let things = GAME.thingsAt(w.x, w.y)
+    if (things.length) {
+      let toShow = things[0]
+      UI.updateCursor(toShow, GAME.player.canSee(toShow))
+    } else {
+      UI.updateCursor(w)
+    }
+  }
 }
 
 Main.cmds = {

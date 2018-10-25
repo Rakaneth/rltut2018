@@ -36,4 +36,14 @@ UI.updateBeast = function(val) {
   beast.setAttribute('value', val);
 }
 
+UI.updateCursor = function(entity, see) {
+  let curs = document.getElementById('cursor')
+  if (entity.color) {
+    curs.style = `color: ${entity.color}`
+    curs.innerText = see ? entity.desc : entity.smellDesc
+  } else {
+    curs.innerText = `(${entity.x},${entity.y})`
+  }
+}
+
 module.exports = UI

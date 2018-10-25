@@ -6,7 +6,7 @@
   </head>
   <body>
     <div id="screen"></div>
-    <div id="stats" title="Stats">
+    <div id="stats" title="Stats" class="pane">
       <p>Name: <span id='char-name'></span></p>
       <p>Description: <span id='char-desc'></span></p>
       <p>Location: <span id='char-loc'></span></p>
@@ -16,10 +16,14 @@
         </ul>
       </p>
     </div>
-    <div>
+    <div class="pane">
       <ul id='messages'></ul>
     </div>
-      <progress id="beast" value="20" max="100"></progress>
+    <div>
+      On cursor: <span id="cursor"></span>
+    </div>
+    <div>
+      <progress id="beast" value="0" max="100"></progress>
     </div>
   </body>
   <script>

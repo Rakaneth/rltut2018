@@ -24,7 +24,7 @@ window.onload = () => {
     let [mx, my] = GAME._display.eventToPosition(e)
     GAME._curScreen.handleMouseClick(mx, my, e.button)
   })
-  window.addEventListener('mouseover', (e) => {
+  screen.addEventListener('mousemove', (e) => {
     let [mx, my] = GAME._display.eventToPosition(e)
     GAME._curScreen.handleMouseover(mx, my)
   })
