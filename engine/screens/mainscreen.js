@@ -79,7 +79,13 @@ Main.handleMouseover = function(mx, my) {
     let things = GAME.thingsAt(w.x, w.y)
     if (things.length) {
       let toShow = things[0]
-      UI.updateCursor(toShow, GAME.player.canSee(toShow))
+      if (GAME.player.canSee(toShow)) {
+        UI.updateCursor(toShow, true)
+      } else if (GAME.player.canSmell(toShow)) {
+        UI.updateCursor(toShow, false)
+      } else {
+        UI.updateCursor(w)
+      }
     } else {
       UI.updateCursor(w)
     }

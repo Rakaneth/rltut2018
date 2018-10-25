@@ -35,7 +35,7 @@ window.onload = () => {
   GAME._huntMap = new DMap(GAME._map, [GAME.player.loc])
   GAME._fleeMap = GAME._huntMap.fleeMap()
   let choices = ['bear', 'deer', 'rabbit']
-  for (let i=0; i<50; i++) {
+  for (let i=0; i<20; i++) {
     let animalBase = choices.random()
     let animal = FACTORY.makeCreature(animalBase)
     GAME.addEntity(animal)
